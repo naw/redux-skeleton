@@ -1,24 +1,22 @@
-## Intent
+## Derived Data Experiment ##
 
-This is the skeleton for a webpack-enabled react-redux application, with [redux-devtools](https://github.com/gaearon/redux-devtools) ready to go.
+This branch is intended to explore some solutions to the question posed here:
+htps://github.com/rackt/redux/issues/291#issuecomment-125047678
 
-Thie goal is to have a readily clonable application infrastructure on which you can build basic react-redux
-applications.
+Do ActionCreators need to know how to call several API's to update various components?
 
-##Installation:
+vladar suggested a couple of approaches:
 
-1. Clone this repository.
+1. Move the API calls into the reducers
+2. Allow reducers to emit side effects for the API calls.
 
-2. Run `npm install`
+My general approach is going to be:
 
-3. Run `npm start`
+1. topAuthor is actually derived data, so it doesn't belong in the client state (except possibly
+   as cached data)
 
-## Configuration:
+2. if all state is on the client (i.e. no API's), this is obvious --- update the state with the raw data, and the component itself (or something like reselect) is responsible for computing the derived data
 
-[redux-devtools](https://github.com/gaearon/redux-devtools) is on by default. You can turn it off by modifying the `USE_DEV_TOOLS` constant in ./configureStore.js
+3. if the state is stored on the server: Will address in future commit.
 
-## Acknowledgements
 
-The basic file structure, webpack config, etc. was lifted from the TodoMVC example in the examples folder of [redux](https://github.com/rackt/redux)
-
-Specifically from [this place](https://github.com/rackt/redux/tree/0509c6c0b0730920991af32925a339215dd07bff/examples/todomvc) in the tree.
