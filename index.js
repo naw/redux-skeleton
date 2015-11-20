@@ -5,7 +5,14 @@ import { DevTools, LogMonitor, DebugPanel } from 'redux-devtools/lib/react';
 import App from './containers/App'
 import configureStore, { USE_DEV_TOOLS } from './store/configureStore'
 
+import emailApp from './emailApp'
+
+window.emailApp = emailApp;
 const store = configureStore();
+
+store.dispatch(emailApp.actions.folder.fetchFolders());
+store.dispatch(emailApp.actions.email.fetchEmails());
+
 
 const debugPanel = USE_DEV_TOOLS ? (
   <DebugPanel top right bottom>
