@@ -6,8 +6,11 @@ import thunk from 'redux-thunk';
 export const USE_DEV_TOOLS = true;
 
 export default function configureStore(initialState) {
-  const finalCreateStore = USE_DEV_TOOLS ? compose(applyMiddleware(thunk), devTools())(createStore) : compose(applyMiddleware(thunk))(createStore);
-  const store = finalCreateStore(rootReducer, initialState)
+  let composed = compose(applyMiddleware(thunk));
+  if(USE_DEV_TOOLS) {
+    composed = compose(composed, devTools());
+  }
+  const store = composed(createStore)(rootReducer, initialState);
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers', () => {
