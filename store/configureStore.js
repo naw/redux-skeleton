@@ -2,13 +2,11 @@ import { compose, createStore, applyMiddleware } from 'redux';
 import rootReducer from '../reducers'
 import { devTools } from 'redux-devtools';
 import thunk from 'redux-thunk';
-import { reduxReactRouter } from 'redux-router';
-import { createHistory } from 'history';
 
 export const USE_DEV_TOOLS = true;
 
 export default function configureStore(initialState) {
-  let composed = compose(applyMiddleware(thunk), reduxReactRouter({createHistory}));
+  let composed = compose(applyMiddleware(thunk));
   if(USE_DEV_TOOLS) {
     composed = compose(composed, devTools());
   }

@@ -1539,11 +1539,6 @@
         }
       }
     },
-    "redux-router": {
-      "version": "1.0.0-beta4",
-      "from": "redux-router@>=1.0.0-beta4 <2.0.0",
-      "resolved": "https://registry.npmjs.org/redux-router/-/redux-router-1.0.0-beta4.tgz"
-    },
     "redux-thunk": {
       "version": "1.0.0",
       "from": "redux-thunk@>=1.0.0 <2.0.0",

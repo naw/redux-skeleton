@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import { DevTools, LogMonitor, DebugPanel } from 'redux-devtools/lib/react';
 import App from './containers/App'
 import configureStore, { USE_DEV_TOOLS } from './store/configureStore'
-import { ReduxRouter } from 'redux-router'
 import { Route, Router } from 'react-router'
 
 import emailApp from './emailApp'
@@ -30,13 +29,13 @@ let rootElement = document.getElementById('root')
 render(
   <div>
     <Provider store={store}>
-      <ReduxRouter>
+      <Router>
         <Route path="/" component={App} onEnter={pageLoaders.appShow}>
           <Route path="folders" component={Folders} onEnter={pageLoaders.foldersIndex}/>
           <Route path="emails" component={Emails} onEnter={pageLoaders.emailsIndex}/>
           <Route path="folder/:folderId" component={Folder} onEnter={pageLoaders.folderShow}/>
         </Route>
-      </ReduxRouter>
+      </Router>
     </Provider>
     {debugPanel}
   </div>,
