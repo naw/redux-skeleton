@@ -18,6 +18,7 @@ const fakeEmail = function(folders) {
     id: uid(),
     sender: Faker.name.findName(),
     subject: Faker.internet.domainWord(),
+    body: Faker.lorem.paragraphs(),
     folderId: _.sample(folders.map((folder) => folder.id))
   }
 }

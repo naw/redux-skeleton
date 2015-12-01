@@ -1,10 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-
+import { Link } from 'react-router'
 import emailApp from '../emailApp'
-
 import MoveEmail from './MoveEmail'
-
 
 class Folder extends Component {
 
@@ -27,7 +25,7 @@ class Folder extends Component {
               emails.map((email) => {
                 return (
                   <tr key={email.id}>
-                    <td>{email.subject}</td>
+                    <td><Link to={'/folder/' + folder.id + '/email/' + email.id}>{email.subject}</Link></td>
                     <td>{email.sender}</td>
                     <td><button onClick={() => this.props.removeEmail(email.id)}>Delete</button></td>
                     <td><MoveEmail emailId={email.id}/></td>
@@ -37,6 +35,7 @@ class Folder extends Component {
             }
           </tbody>
         </table>
+        {this.props.children}
       </div>
     )
   }

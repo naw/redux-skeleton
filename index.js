@@ -11,6 +11,7 @@ import emailApp from './emailApp'
 import Folders from './components/Folders'
 import Folder from './components/Folder'
 import Emails from './components/Emails'
+import EmailPreview from './components/EmailPreview'
 
 import generatePageLoaders from './pageLoaders'
 
@@ -33,7 +34,9 @@ render(
         <Route path="/" component={App} onEnter={pageLoaders.appShow}>
           <Route path="folders" component={Folders} onEnter={pageLoaders.foldersIndex}/>
           <Route path="emails" component={Emails} onEnter={pageLoaders.emailsIndex}/>
-          <Route path="folder/:folderId" component={Folder} onEnter={pageLoaders.folderShow}/>
+          <Route path="folder/:folderId" component={Folder} onEnter={pageLoaders.folderShow}>
+            <Route path="email/:emailId" component={EmailPreview}/>
+          </Route>
         </Route>
       </Router>
     </Provider>
