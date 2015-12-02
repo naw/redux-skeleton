@@ -6,7 +6,9 @@ class OpenEmails extends Component {
 
   render() {
     const { openEmails } = this.props;
+    console.log("Rendering openEmails")
     return (
+
       <div className="openEmails">
         {
           openEmails.map((openEmail) => {
