@@ -2,7 +2,9 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import emailApp from '../emailApp'
+import * as actions from '../actions'
 import MoveEmail from './MoveEmail'
+
 
 class Folder extends Component {
 
@@ -18,6 +20,7 @@ class Folder extends Component {
               <th>Sender</th>
               <th>Delete</th>
               <th>Move</th>
+              <th>Open</th>
             </tr>
           </thead>
           <tbody>
@@ -29,6 +32,7 @@ class Folder extends Component {
                     <td>{email.sender}</td>
                     <td><button onClick={() => this.props.removeEmail(email.id)}>Delete</button></td>
                     <td><MoveEmail emailId={email.id}/></td>
+                    <td><button onClick={() => this.props.openEmail(email.id)}>Open</button></td>
                   </tr>
                 )
               })
@@ -52,7 +56,8 @@ const mapStateToProps = function(state, existingProps) {
 const mapDispatchToProps = function(dispatch) {
   return {
     fetchEmails: () => dispatch(emailApp.actions.email.fetchEmails()),
-    removeEmail: (emailId) => dispatch(emailApp.actions.email.removeEmail(emailId))
+    removeEmail: (emailId) => dispatch(actions.removeEmail(emailId)),
+    openEmail: (emailId) => dispatch(actions.openEmail(emailId))
   }
 }
 

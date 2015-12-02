@@ -1,7 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import Folders from '../components/Folders'
+import OpenEmails from '../components/OpenEmails.js';
 import { Link } from 'react-router'
+
 
 class App extends Component {
   render() {
@@ -31,6 +33,7 @@ class App extends Component {
         <div className="main">
           {this.props.children}
         </div>
+        <OpenEmails/>
       </div>
     )
   }

@@ -7,15 +7,19 @@ class EmailPreview extends Component {
     console.log("Rendering email preview");
     const { email } = this.props;
     console.log(email);
-    return (
-
-      <div>
-        <h4>{email.subject}</h4>
+    if(email) {
+      return (
         <div>
-          {email.body}
+          <h4>{email.subject}</h4>
+          <div>
+            {email.body}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
+    else {
+      return <div/>;
+    }
   }
 }
 
