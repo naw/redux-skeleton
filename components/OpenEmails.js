@@ -6,7 +6,7 @@ class OpenEmails extends Component {
 
   render() {
     const { openEmails } = this.props;
-    console.log("Rendering openEmails")
+    // console.log("Rendering openEmails")
     return (
 
       <div className="openEmails">

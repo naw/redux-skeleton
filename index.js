@@ -7,18 +7,17 @@ import configureStore, { USE_DEV_TOOLS } from './store/configureStore'
 import { Route, Router as RealRouter } from 'react-router'
 
 class Router extends RealRouter {
-  render() {
-    console.log("Rendering Router")
-    return super.render();
-  }
-  componentDidMount() {
-    console.log("Router did mount")
+  // render() {
+  //   console.log("Rendering Router")
+  //   return super.render();
+  // }
+  // componentDidMount() {
+  //   console.log("Router did mount")
 
-  }
-  componentDidUpdate() {
-    console.log("Router did update")
-
-  }
+  // }
+  // componentDidUpdate() {
+  //   console.log("Router did update")
+  // }
 
 }
 
@@ -35,6 +34,10 @@ import createBrowserHistory from 'history/lib/createBrowserHistory'
 window.emailApp = emailApp;
 const store = configureStore();
 
+// sloppy temporary hack to make
+// dispatch available in various places.
+window.store = store;
+
 const debugPanel = USE_DEV_TOOLS ? (
   <DebugPanel top right bottom>
     <DevTools store={store} monitor={LogMonitor} />
@@ -42,18 +45,10 @@ const debugPanel = USE_DEV_TOOLS ? (
 
 let rootElement = document.getElementById('root')
 
-
-const customCreateElement = function(Component, props) {
-  if(Component.populateStore) {
-    Component.populateStore(store, props);
-  }
-  return React.createElement(Component, props);
-}
-
 render(
   <div>
     <Provider store={store}>
-      <Router history={createBrowserHistory()} createElement={customCreateElement}>
+      <Router history={createBrowserHistory()}>
         <Route path="/" component={App} onEnter={() => console.log("onEnter for App")}>
           <Route path="folders" component={Folders} onEnter={() => console.log("onEnter for Folders")}/>
           <Route path="emails" component={Emails} onEnter={() => console.log("onEnter for emails")}/>

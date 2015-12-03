@@ -28,9 +28,10 @@ class Folders extends Component {
 }
 
 const mapStateToProps = function(state) {
+  const foldersState = state.emailApp.folders();
   return {
-    folders: state.emailApp.folders.folders,
-    fetchedAt: state.emailApp.folders.fetchedAt
+    folders: foldersState.folders,
+    fetchedAt: foldersState.fetchedAt
   }
 }
 

@@ -10,18 +10,21 @@ import emailApp from '../emailApp';
 class App extends Component {
   static populateStore(store, props) {
     console.log("populating store for app");
-    store.dispatch(emailApp.actions.folder.fetchFolders());
+    //store.dispatch(emailApp.actions.folder.fetchFolders());
   }
-  componentDidMount() {
-    console.log("component did mount for app")
-  }
+  // componentDidMount() {
+  //   console.log("component did mount for app")
+  // }
+  // componentWillReceiveProps() {
+  //   console.log("will receive props for app");
 
-  componentDidUpdate() {
-    console.log("component did update for app")
-  }
+  // }
+
+  // componentDidUpdate() {
+  //   console.log("component did update for app")
+  // }
 
   render() {
-    console.log("rendering app");
     const { dispatch, folders } = this.props
     return (
       <div>
@@ -58,4 +61,4 @@ class App extends Component {
 }
 
 // Wrap the component to inject dispatch and state into it
-export default connect((state) => { return { folders: state.emailApp.folders.folders } })(App)
+export default connect((state) => { return { folders: state.emailApp.folders().folders } })(App)
