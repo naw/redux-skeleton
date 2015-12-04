@@ -6,6 +6,7 @@ import App from './containers/App'
 import configureStore, { USE_DEV_TOOLS } from './store/configureStore'
 import { Route, Router as RealRouter } from 'react-router'
 import * as actions from './actions/';
+import { configureDirtyHook } from './utils/dirtyHook';
 import emailApp from './emailApp'
 import Folders from './components/Folders'
 import Folder from './components/Folder'
@@ -30,6 +31,8 @@ class Router extends RealRouter {
 
 window.emailApp = emailApp;
 const store = configureStore();
+
+configureDirtyHook(store);
 
 const pageLoaders = generatePageLoaders(store.dispatch);
 
