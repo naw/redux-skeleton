@@ -27,6 +27,14 @@ export function fetchEmails() {
   }
 }
 
+export function ensureFreshEmails() {
+  return (dispatch, getState) => {
+    if(getState().emailApp.emails.dirty) {
+      dispatch(fetchEmails());
+    }
+  }
+}
+
 export function removeEmail(emailId) {
   return (dispatch) => {
     api.removeEmail(emailId);

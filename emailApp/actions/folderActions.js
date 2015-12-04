@@ -27,6 +27,14 @@ export const fetchFolders = function() {
   }
 }
 
+export const ensureFreshFolders = function() {
+  return (dispatch, getState) => {
+    if(getState().emailApp.folders.dirty) {
+      dispatch(fetchFolders());
+    }
+  }
+}
+
 export const addFolder = function(name) {
   return (dispatch) => {
     api.addFolder(name);

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import superConnect from '../utils/superConnect'
 
 import AddFolder from './AddFolder'
 import emailApp from '../emailApp'
@@ -28,7 +28,7 @@ class Folders extends Component {
 }
 
 const mapStateToProps = function(state) {
-  const foldersState = state.emailApp.folders();
+  const foldersState = state.emailApp.folders;
   return {
     folders: foldersState.folders,
     fetchedAt: foldersState.fetchedAt
@@ -41,4 +41,8 @@ const mapDispatchToProps = function(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Folders);
+const runSideEffects = function(state, dispatch) {
+  dispatch(emailApp.actions.folder.ensureFreshFolders());
+}
+
+export default superConnect(runSideEffects, mapStateToProps, mapDispatchToProps)(Folders);

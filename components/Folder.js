@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import superConnect from '../utils/superConnect'
 import { Link } from 'react-router'
 import emailApp from '../emailApp'
 import * as actions from '../actions'
 import MoveEmail from './MoveEmail'
-
 
 class Folder extends Component {
 
@@ -53,8 +52,8 @@ class Folder extends Component {
 }
 
 const mapStateToProps = function(state, existingProps) {
-  const foldersState = state.emailApp.folders();
-  const emailsState = state.emailApp.emails();
+  const foldersState = state.emailApp.folders;
+  const emailsState = state.emailApp.emails;
   const folder = foldersState.folders ? foldersState.folders.find((folder) => folder.id === existingProps.params.folderId) : undefined;
   const emails = emailsState.emails ? emailsState.emails.filter((email) => email.folderId === existingProps.params.folderId) : undefined;
   return {
@@ -72,4 +71,9 @@ const mapDispatchToProps = function(dispatch) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Folder);
+const runSideEffects = function(state, dispatch) {
+  dispatch(emailApp.actions.folder.ensureFreshFolders());
+  dispatch(emailApp.actions.email.ensureFreshEmails());
+}
+
+export default superConnect(runSideEffects, mapStateToProps, mapDispatchToProps)(Folder);

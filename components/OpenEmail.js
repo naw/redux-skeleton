@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import superConnect from '../utils/superConnect'
+
+import emailApp from '../emailApp'
 
 class OpenEmail extends Component {
 
@@ -16,8 +18,12 @@ class OpenEmail extends Component {
 
 const mapStateToProps = function(state, existingProps) {
   return {
-    email: state.emailApp.emails().emails.find((email) => email.id === existingProps.openEmail.emailId)
+    email: state.emailApp.emails.emails.find((email) => email.id === existingProps.openEmail.emailId)
   }
 }
 
-export default connect(mapStateToProps)(OpenEmail);
+const runSideEffects = function(state, dispatch) {
+  dispatch(emailApp.actions.email.ensureFreshEmails());
+}
+
+export default superConnect(runSideEffects, mapStateToProps)(OpenEmail);
