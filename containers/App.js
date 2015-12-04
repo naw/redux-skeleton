@@ -6,6 +6,8 @@ import { Link } from 'react-router'
 
 import emailApp from '../emailApp';
 
+import storeAccessor from '../utils/storeAccessor';
+
 
 class App extends Component {
   static populateStore(store, props) {
@@ -64,4 +66,4 @@ class App extends Component {
 }
 
 // Wrap the component to inject dispatch and state into it
-export default connect((state) => { return { folders: state.emailApp.folders().folders } })(App)
+export default connect((state) => { return { folders: storeAccessor.emailApp.folders().folders } })(App)

@@ -32,14 +32,12 @@ import Folder from './components/Folder'
 import Emails from './components/Emails'
 import EmailPreview from './components/EmailPreview'
 import Counter from './components/Counter'
-
+import storeAccessor from './utils/storeAccessor'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 window.emailApp = emailApp;
 const store = configureStore();
 
-// sloppy temporary hack to make
-// dispatch available in various places.
-window.store = store;
+storeAccessor.loadStore(store);
 
 const debugPanel = USE_DEV_TOOLS ? (
   <DebugPanel top right bottom>

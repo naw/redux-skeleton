@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 import emailApp from '../emailApp'
 import * as actions from '../actions'
 import MoveEmail from './MoveEmail'
-
+import storeAccessor from '../utils/storeAccessor'
 
 class Folder extends Component {
 
@@ -53,8 +53,8 @@ class Folder extends Component {
 }
 
 const mapStateToProps = function(state, existingProps) {
-  const foldersState = state.emailApp.folders();
-  const emailsState = state.emailApp.emails();
+  const foldersState = storeAccessor.emailApp.folders();
+  const emailsState = storeAccessor.emailApp.emails();
   const folder = foldersState.folders ? foldersState.folders.find((folder) => folder.id === existingProps.params.folderId) : undefined;
   const emails = emailsState.emails ? emailsState.emails.filter((email) => email.folderId === existingProps.params.folderId) : undefined;
   return {
