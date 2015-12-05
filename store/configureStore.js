@@ -3,7 +3,7 @@ import rootReducer from '../reducers'
 import { devTools } from 'redux-devtools';
 import thunk from 'redux-thunk';
 
-export const USE_DEV_TOOLS = false;
+export const USE_DEV_TOOLS = true;
 
 export default function configureStore(initialState) {
   let composed = compose(applyMiddleware(thunk));
