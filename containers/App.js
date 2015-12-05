@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import superConnect from '../utils/superConnect'
 import Folders from '../components/Folders'
 import OpenEmails from '../components/OpenEmails.js';
 import { Link } from 'react-router'
@@ -63,5 +63,9 @@ class App extends Component {
   }
 }
 
+const runSideEffects = function(state, dispatch) {
+  dispatch(emailApp.actions.folder.ensureFreshFolders());
+}
+
 // Wrap the component to inject dispatch and state into it
-export default connect((state) => { return { folders: state.emailApp.folders().folders } })(App)
+export default superConnect(runSideEffects, (state) => { return { folders: state.emailApp.folders.folders } })(App)

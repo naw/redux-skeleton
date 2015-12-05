@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import superConnect from '../utils/superConnect'
 
 import emailApp from '../emailApp'
 
@@ -38,7 +38,7 @@ class MoveEmail extends Component {
 }
 
 const mapStateToProps = function(state, existingProps) {
-  const foldersState = state.emailApp.folders();
+  const foldersState = state.emailApp.folders;
   return {
     folders: foldersState.folders
   }
@@ -50,4 +50,8 @@ const mapDispatchToProps = function(dispatch, existingProps) {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MoveEmail);
+const runSideEffects = function(state, dispatch) {
+  dispatch(emailApp.actions.folder.ensureFreshFolders());
+}
+
+export default superConnect(runSideEffects, mapStateToProps, mapDispatchToProps)(MoveEmail);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import superConnect from '../utils/superConnect'
 
 class EmailPreview extends Component {
   static populateStore(store, props) {
@@ -33,4 +33,8 @@ const mapStateToProps = function(state, existingProps) {
   }
 }
 
-export default connect(mapStateToProps)(EmailPreview);
+const runSideEffects = function() {
+  dispatch(emailApp.actions.email.ensureFreshEmails());
+}
+
+export default superConnect(runSideEffects, mapStateToProps)(EmailPreview);
