@@ -6,6 +6,8 @@ import App from './containers/App'
 import configureStore, { USE_DEV_TOOLS } from './store/configureStore'
 import { Route, Router as RealRouter } from 'react-router'
 
+import * as actions from './actions/';
+
 class Router extends RealRouter {
   // render() {
   //   console.log("Rendering Router")
@@ -29,6 +31,7 @@ import Folders from './components/Folders'
 import Folder from './components/Folder'
 import Emails from './components/Emails'
 import EmailPreview from './components/EmailPreview'
+import Counter from './components/Counter'
 
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 window.emailApp = emailApp;
@@ -55,6 +58,7 @@ render(
           <Route path="folder/:folderId" component={Folder} onEnter={() => console.log("onEnter for folder")}>
             <Route path="email/:emailId" component={EmailPreview} onEnter={() => console.log("onEnter for EmailPreview")}/>
           </Route>
+          <Route path="counter" component={Counter} onEnter={() => store.dispatch(actions.initializeCounter())}/>
         </Route>
       </Router>
     </Provider>

@@ -48,6 +48,9 @@ class App extends Component {
             <li>
               <Link to="/emails">Emails</Link>
             </li>
+            <li>
+              <Link to="/counter">Counter</Link>
+            </li>
           </ul>
         </div>
         <div className="main">

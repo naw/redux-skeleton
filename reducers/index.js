@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import emailApp from '../emailApp'
-import { OPEN_EMAIL, REMOVED_EMAIL } from '../actions';
+import { OPEN_EMAIL, REMOVED_EMAIL, INCREMENT_COUNTER, INITIALIZE_COUNTER } from '../actions';
 import { FETCHED_EMAILS } from '../emailApp/actions/emailActions'
 
 const openEmailsReducer = function(state = [], action) {
@@ -14,11 +14,23 @@ const openEmailsReducer = function(state = [], action) {
   }
 }
 
+const counterReducer = function(state = 0, action) {
+  switch(action.type) {
+    case INITIALIZE_COUNTER:
+      return 0;
+    case INCREMENT_COUNTER:
+      return state + 1;
+    default:
+      return state;
+  }
+}
+
 const guiReducer = combineReducers({
   openEmails: openEmailsReducer
 });
 
 const rootReducer = combineReducers({
+  counter: counterReducer,
   emailApp: emailApp.reducer,
   gui: guiReducer,
 });
