@@ -6,6 +6,8 @@ import App from './containers/App'
 import configureStore, { USE_DEV_TOOLS } from './store/configureStore'
 import { Route, Router as RealRouter } from 'react-router'
 
+import { syncReduxAndRouter } from 'redux-simple-router'
+
 import * as actions from './actions/';
 
 class Router extends RealRouter {
@@ -37,6 +39,10 @@ import createBrowserHistory from 'history/lib/createBrowserHistory'
 window.emailApp = emailApp;
 const store = configureStore();
 
+const history = createBrowserHistory();
+
+syncReduxAndRouter(history, store)
+
 // sloppy temporary hack to make
 // dispatch available in various places.
 window.store = store;
@@ -51,14 +57,14 @@ let rootElement = document.getElementById('root')
 render(
   <div>
     <Provider store={store}>
-      <Router history={createBrowserHistory()}>
+      <Router history={history}>
         <Route path="/" component={App} onEnter={() => console.log("onEnter for App")}>
           <Route path="folders" component={Folders} onEnter={() => console.log("onEnter for Folders")}/>
           <Route path="emails" component={Emails} onEnter={() => console.log("onEnter for emails")}/>
           <Route path="folder/:folderId" component={Folder} onEnter={() => console.log("onEnter for folder")}>
             <Route path="email/:emailId" component={EmailPreview} onEnter={() => console.log("onEnter for EmailPreview")}/>
           </Route>
-          <Route path="counter" component={Counter} onEnter={() => store.dispatch(actions.initializeCounter())}/>
+          <Route path="counter" component={Counter}/>
         </Route>
       </Router>
     </Provider>
