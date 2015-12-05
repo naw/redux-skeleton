@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-
+import storeAccessor from '../utils/storeAccessor'
 import MoveEmail from './MoveEmail'
 
 class Emails extends Component {
@@ -47,8 +47,8 @@ class Emails extends Component {
 }
 
 const mapStateToProps = function(state) {
-  const emailState = state.emailApp.emails();
-  let folders = state.emailApp.folders().folders;
+  const emailState = storeAccessor.emailApp.emails();
+  let folders = storeAccessor.emailApp.folders().folders;
   let emails = emailState.emails;
   if(emails && folders) {
     emails = emails.map((email) => {

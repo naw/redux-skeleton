@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import AddFolder from './AddFolder'
 import emailApp from '../emailApp'
+import storeAccessor from '../utils/storeAccessor'
 
 class Folders extends Component {
 
@@ -28,7 +29,7 @@ class Folders extends Component {
 }
 
 const mapStateToProps = function(state) {
-  const foldersState = state.emailApp.folders();
+  const foldersState = storeAccessor.emailApp.folders();
   return {
     folders: foldersState.folders,
     fetchedAt: foldersState.fetchedAt

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
+import storeAccessor from '../utils/storeAccessor'
 class EmailPreview extends Component {
   static populateStore(store, props) {
     console.log("populating store for email preview");
@@ -29,7 +29,7 @@ class EmailPreview extends Component {
 
 const mapStateToProps = function(state, existingProps) {
   return {
-    email: state.emailApp.emails.emails.find((email) => email.id == existingProps.params.emailId)
+    email: storeAccessor.emailApp.emails().emails.find((email) => email.id == existingProps.params.emailId)
   }
 }
 
