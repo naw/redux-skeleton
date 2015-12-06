@@ -2,6 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class EmailPreview extends Component {
+  static populateStore(store, props) {
+    console.log("populating store for email preview");
+    // store.dispatch(emailApp.actions.folder.fetchFolders());
+  }
 
   render() {
     console.log("Rendering email preview");

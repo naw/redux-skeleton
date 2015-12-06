@@ -13,7 +13,7 @@ const fetchedEmails = function(emails, fetchedAt) {
 export function fetchEmails() {
   return (dispatch) => {
     const [emails, fetchedAt] = api.fetchEmails();
-    dispatch(fetchedEmails(emails, fetchedAt));
+    setTimeout(() => dispatch(fetchedEmails(emails, fetchedAt)), 1000);
   }
 }
 

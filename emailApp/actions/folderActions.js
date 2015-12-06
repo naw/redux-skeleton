@@ -13,7 +13,8 @@ const fetchedFolders = function(folders, fetchedAt) {
 export const fetchFolders = function() {
   return (dispatch) => {
     const [folders, fetchedAt] = api.fetchFolders();
-    dispatch(fetchedFolders(folders, fetchedAt));
+    console.log("dispatching fetched folders");
+    setTimeout(() => dispatch(fetchedFolders(folders, fetchedAt)), 1000);
   }
 }
 
