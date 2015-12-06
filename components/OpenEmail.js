@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import storeAccessor from '../utils/storeAccessor';
+
 class OpenEmail extends Component {
 
   render() {
@@ -16,7 +18,7 @@ class OpenEmail extends Component {
 
 const mapStateToProps = function(state, existingProps) {
   return {
-    email: state.emailApp.emails.emails.find((email) => email.id === existingProps.openEmail.emailId)
+    email: storeAccessor.emailApp.emails().emails.find((email) => email.id === existingProps.openEmail.emailId)
   }
 }
 

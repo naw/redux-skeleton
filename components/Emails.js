@@ -1,10 +1,9 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-
+import storeAccessor from '../utils/storeAccessor'
 import MoveEmail from './MoveEmail'
 
 class Emails extends Component {
-
   render() {
     const { emails, fetchedAt } = this.props;
     return (
@@ -27,9 +26,9 @@ class Emails extends Component {
                   <tr key={email.id}>
                     <td>{email.subject}</td>
                     <td>{email.sender}</td>
-                    <td>{email.folderName}</td>
+                    <td>{email.folder ? email.folder.name : 'Missing...'}</td>
                     <td><button onClick={() => this.props.removeEmail(email.id)}>Delete</button></td>
-                    <td><MoveEmail emailId={email.id}/></td>
+                    <td><MoveEmail email={email}/></td>
                   </tr>
                 )
               })
@@ -42,11 +41,17 @@ class Emails extends Component {
 }
 
 const mapStateToProps = function(state) {
+  const emailState = storeAccessor.emailApp.emails();
+  let folders = storeAccessor.emailApp.folders().folders;
+  let emails = emailState.emails;
+  if(emails && folders) {
+    emails = emails.map((email) => {
+      return Object.assign({}, email, { folder: folders.find((folder) => folder.id === email.folderId) });
+    });
+  }
   return {
-    emails: state.emailApp.emails.emails.map((email) => {
-      return Object.assign({}, email, { folderName: state.emailApp.folders.folders.find((folder) => folder.id === email.folderId).name });
-    }),
-    fetchedAt: state.emailApp.emails.fetchedAt
+    emails: emails,
+    fetchedAt: emailState.fetchedAt
   }
 }
 
