@@ -5,14 +5,21 @@ import { DevTools, LogMonitor, DebugPanel } from 'redux-devtools/lib/react';
 import App from './containers/App'
 import configureStore, { USE_DEV_TOOLS } from './store/configureStore'
 import { Route, Router as RealRouter } from 'react-router'
+
+import { syncReduxAndRouter } from 'redux-simple-router'
+
 import * as actions from './actions/';
 import emailApp from './emailApp'
+
 import Folders from './components/Folders'
 import Folder from './components/Folder'
 import Emails from './components/Emails'
 import EmailPreview from './components/EmailPreview'
 import Counter from './components/Counter'
+
 import generatePageLoaders from './pageLoaders'
+
+import createBrowserHistory from 'history/lib/createBrowserHistory'
 
 class Router extends RealRouter {
   render() {
@@ -28,10 +35,15 @@ class Router extends RealRouter {
   }
 }
 
+
 window.emailApp = emailApp;
 const store = configureStore();
 
 const pageLoaders = generatePageLoaders(store.dispatch);
+
+const history = createBrowserHistory();
+
+syncReduxAndRouter(history, store)
 
 const debugPanel = USE_DEV_TOOLS ? (
   <DebugPanel top right bottom>
@@ -43,14 +55,14 @@ let rootElement = document.getElementById('root')
 render(
   <div>
     <Provider store={store}>
-      <Router>
+      <Router history={history}>
         <Route path="/" component={App} onEnter={pageLoaders.appShow}>
           <Route path="folders" component={Folders} onEnter={pageLoaders.foldersIndex}/>
           <Route path="emails" component={Emails} onEnter={pageLoaders.emailsIndex}/>
           <Route path="folder/:folderId" component={Folder} onEnter={pageLoaders.folderShow}>
             <Route path="email/:emailId" component={EmailPreview}/>
           </Route>
-          <Route path="counter" component={Counter} onEnter={() => store.dispatch(actions.initializeCounter())}/>
+          <Route path="counter" component={Counter}/>
         </Route>
       </Router>
     </Provider>
