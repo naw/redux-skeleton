@@ -676,6 +676,11 @@
       "from": "extsprintf@1.0.2",
       "resolved": "https://registry.npmjs.org/extsprintf/-/extsprintf-1.0.2.tgz"
     },
+    "faker": {
+      "version": "3.0.1",
+      "from": "faker@>=0.7.2",
+      "resolved": "https://registry.npmjs.org/faker/-/faker-3.0.1.tgz"
+    },
     "fast-levenshtein": {
       "version": "1.0.7",
       "from": "fast-levenshtein@>=1.0.0 <1.1.0",
@@ -817,6 +822,11 @@
       "version": "3.1.2",
       "from": "hawk@>=3.1.0 <3.2.0",
       "resolved": "https://registry.npmjs.org/hawk/-/hawk-3.1.2.tgz"
+    },
+    "history": {
+      "version": "1.13.1",
+      "from": "history@>=1.12.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/history/-/history-1.13.1.tgz"
     },
     "hoek": {
       "version": "2.16.3",
@@ -1473,6 +1483,11 @@
       "from": "react-redux@>=4.0.0 <5.0.0",
       "resolved": "https://registry.npmjs.org/react-redux/-/react-redux-4.0.0.tgz"
     },
+    "react-router": {
+      "version": "1.0.0",
+      "from": "react-router@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/react-router/-/react-router-1.0.0.tgz"
+    },
     "readable-stream": {
       "version": "1.1.13",
       "from": "readable-stream@>=1.1.0 <1.2.0",
@@ -1523,6 +1538,11 @@
           "resolved": "https://registry.npmjs.org/react-redux/-/react-redux-3.1.0.tgz"
         }
       }
+    },
+    "redux-thunk": {
+      "version": "1.0.0",
+      "from": "redux-thunk@>=1.0.0 <2.0.0",
+      "resolved": "https://registry.npmjs.org/redux-thunk/-/redux-thunk-1.0.0.tgz"
     },
     "regenerate": {
       "version": "1.2.1",
@@ -1856,6 +1876,11 @@
       "from": "uglify-to-browserify@>=1.0.0 <1.1.0",
       "resolved": "https://registry.npmjs.org/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz"
     },
+    "uid": {
+      "version": "0.0.2",
+      "from": "uid@>=0.0.2",
+      "resolved": "https://registry.npmjs.org/uid/-/uid-0.0.2.tgz"
+    },
     "unpipe": {
       "version": "1.0.0",
       "from": "unpipe@>=1.0.0 <1.1.0",
@@ -1900,6 +1925,11 @@
       "version": "0.0.4",
       "from": "vm-browserify@0.0.4",
       "resolved": "https://registry.npmjs.org/vm-browserify/-/vm-browserify-0.0.4.tgz"
+    },
+    "warning": {
+      "version": "2.1.0",
+      "from": "warning@>=2.0.0 <3.0.0",
+      "resolved": "https://registry.npmjs.org/warning/-/warning-2.1.0.tgz"
     },
     "watchpack": {
       "version": "0.2.9",

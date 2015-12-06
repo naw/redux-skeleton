@@ -1,6 +1,7 @@
-import { compose, createStore } from 'redux';
+import { compose, createStore, applyMiddleware } from 'redux';
 import rootReducer from '../reducers'
 import { devTools } from 'redux-devtools';
+import thunk from 'redux-thunk';
 
 export const USE_DEV_TOOLS = true;
 
@@ -10,7 +11,6 @@ export default function configureStore(initialState) {
     composed = compose(composed, devTools());
   }
   const store = composed(createStore)(rootReducer, initialState);
-
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
     module.hot.accept('../reducers', () => {
