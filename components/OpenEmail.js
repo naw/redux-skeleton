@@ -16,7 +16,7 @@ class OpenEmail extends Component {
 
 const mapStateToProps = function(state, existingProps) {
   return {
-    email: state.emailApp.emails.emails.find((email) => email.id === existingProps.openEmail.emailId)
+    email: state.emailApp.emails().emails.find((email) => email.id === existingProps.openEmail.emailId)
   }
 }
 

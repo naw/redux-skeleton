@@ -4,6 +4,8 @@ import Folders from '../components/Folders'
 import OpenEmails from '../components/OpenEmails.js';
 import { Link } from 'react-router'
 
+import emailApp from '../emailApp';
+
 
 class App extends Component {
   render() {
@@ -17,11 +19,13 @@ class App extends Component {
               <Link to="/folders">Folders</Link>
               <ul>
                 {
-                  folders.map((folder) => {
-                    return (
-                      <li key={folder.id}><Link to={'/folder/' + folder.id}>{folder.name}</Link></li>
-                    )
-                  })
+                  folders ? (
+                    folders.map((folder) => {
+                      return (
+                        <li key={folder.id}><Link to={'/folder/' + folder.id}>{folder.name}</Link></li>
+                      )
+                    })
+                  ) : <li>Loading Folders...</li>
                 }
               </ul>
             </li>
@@ -37,10 +41,11 @@ class App extends Component {
           {this.props.children}
         </div>
         <OpenEmails/>
+
       </div>
     )
   }
 }
 
 // Wrap the component to inject dispatch and state into it
-export default connect((state) => { return { folders: state.emailApp.folders.folders } })(App)
+export default connect((state) => { return { folders: state.emailApp.folders().folders } })(App)
