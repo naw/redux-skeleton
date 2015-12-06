@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 class EmailPreview extends Component {
-
   render() {
     console.log("Rendering email preview");
     const { email } = this.props;
