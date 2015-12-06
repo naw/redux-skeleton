@@ -5,7 +5,7 @@ import foldersReducer from '../reducers/foldersReducer.js';
 
 const rootReducer = combineReducers({
   emails: emailsReducer,
-  folders: foldersReducer
+  folders: foldersReducer,
 });
 
 export default rootReducer;

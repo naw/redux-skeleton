@@ -3,27 +3,30 @@ import { connect } from 'react-redux'
 
 import AddFolder from './AddFolder'
 import emailApp from '../emailApp'
+import storeAccessor from '../utils/storeAccessor'
 
 class Folders extends Component {
-
   render() {
     const { folders  } = this.props;
     return (
-      <div>
-        <h1>Folders</h1>
-        <ul>
-          { folders.map((folder) => <li key={folder.id}>{folder.name} - <button onClick={() => this.props.removeFolder(folder.id)}>Delete</button></li>) }
-        </ul>
-        <AddFolder/>
-      </div>
+      folders ? (
+        <div>
+          <h1>Folders</h1>
+          <ul>
+            { folders.map((folder) => <li key={folder.id}>{folder.name} - <button onClick={() => this.props.removeFolder(folder.id)}>Delete</button></li>) }
+          </ul>
+          <AddFolder/>
+        </div>
+      ) : <p>Loading...</p>
     )
   }
 }
 
 const mapStateToProps = function(state) {
+  const foldersState = storeAccessor.emailApp.folders();
   return {
-    folders: state.emailApp.folders.folders,
-    fetchedAt: state.emailApp.folders.fetchedAt
+    folders: foldersState.folders,
+    fetchedAt: foldersState.fetchedAt
   }
 }
 

@@ -3,8 +3,18 @@ import { api } from '../api'
 window.api = api;
 
 export const FETCHED_EMAILS = 'FETCHED_EMAILS'
+export const REMOVED_EMAIL = 'REMOVED_EMAIL'
+export const MOVED_EMAIL_TO_FOLDER = 'MOVED_EMAIL_TO_FOLDER'
 
-// State action
+// State actions
+const removedEmail = function(emailId) {
+  return { type: REMOVED_EMAIL, emailId: emailId };
+}
+
+const movedEmailToFolder = function(emailId, folderId) {
+  return { type: MOVED_EMAIL_TO_FOLDER, emailId: emailId, folderId: folderId };
+}
+
 const fetchedEmails = function(emails, fetchedAt) {
   return { type: FETCHED_EMAILS, emails: emails, fetchedAt: fetchedAt  };
 }
@@ -20,13 +30,13 @@ export function fetchEmails() {
 export function removeEmail(emailId) {
   return (dispatch) => {
     api.removeEmail(emailId);
-    dispatch(fetchEmails());
+    dispatch(removedEmail(emailId));
   }
 }
 
 export function moveEmailToFolder(emailId, folderId) {
   return (dispatch) => {
     api.moveEmailToFolder(emailId, folderId);
-    dispatch(fetchEmails());
+    dispatch(movedEmailToFolder(emailId, folderId));
   }
 }
