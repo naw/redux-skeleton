@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react'
-import { connect } from 'react-redux'
+import superConnect from '../utils/superConnect'
 
 import emailApp from '../emailApp'
 
@@ -25,7 +25,11 @@ class MoveEmail extends Component {
     return (
       <form onSubmit={(e) => this.submit(e)}>
         <select onChange={(e) => this.updateSelectedFolder(e.target.value)} value={this.state.selectedFolderId}>
-          { folders.map((folder) => <option key={folder.id} value={folder.id}>{folder.name}</option> )}
+          {
+            folders ? (
+              folders.map((folder) => <option key={folder.id} value={folder.id}>{folder.name}</option> )
+            ) : null
+          }
         </select>
         <button type="submit">Move</button>
       </form>
@@ -34,17 +38,20 @@ class MoveEmail extends Component {
 }
 
 const mapStateToProps = function(state, existingProps) {
-  const email = state.emailApp.emails.emails.find((email) => email.id === existingProps.emailId);
+  const foldersState = state.emailApp.folders;
   return {
-    email: email,
-    folders: state.emailApp.folders.folders
+    folders: foldersState.folders
   }
 }
 
 const mapDispatchToProps = function(dispatch, existingProps) {
   return {
-    moveToFolder: (folderId) => dispatch(emailApp.actions.email.moveEmailToFolder(existingProps.emailId, folderId))
+    moveToFolder: (folderId) => dispatch(emailApp.actions.email.moveEmailToFolder(existingProps.email.id, folderId))
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MoveEmail);
+const runSideEffects = function(state, dispatch) {
+  dispatch(emailApp.actions.folder.ensureFreshFolders());
+}
+
+export default superConnect(runSideEffects, mapStateToProps, mapDispatchToProps)(MoveEmail);
