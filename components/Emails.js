@@ -4,6 +4,11 @@ import { connect } from 'react-redux'
 import MoveEmail from './MoveEmail'
 
 class Emails extends Component {
+  static populateStore(store, props) {
+    console.log("populating store for emails");
+    // store.dispatch(emailApp.actions.folder.fetchFolders());
+  }
+
 
   render() {
     const { emails, fetchedAt } = this.props;
