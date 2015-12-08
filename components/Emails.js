@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
+import koConnect from '../utils/koConnect.js'
+import store from '../store/configureStore'
 
 import MoveEmail from './MoveEmail'
 
@@ -58,3 +60,11 @@ const mapDispatchToProps = function(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Emails);
+
+const emailsViewModel = function() {
+  this.emails = ko.observableArray([]);
+  this.fetchedAt = ko.observable(null);
+  koConnect(this, store, mapStateToProps, mapDispatchToProps);
+}
+
+export { emailsViewModel };
