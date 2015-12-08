@@ -3,13 +3,13 @@ import { render } from 'react-dom'
 import { Provider } from 'react-redux'
 import { DevTools, LogMonitor, DebugPanel } from 'redux-devtools/lib/react';
 import App from './containers/App'
-import configureStore, { USE_DEV_TOOLS } from './store/configureStore'
+import store, { USE_DEV_TOOLS } from './store/configureStore'
 import { Route, Router as RealRouter } from 'react-router'
 import * as actions from './actions/';
 import emailApp from './emailApp'
 import Folders from './components/Folders'
 import Folder from './components/Folder'
-import Emails from './components/Emails'
+import Emails, { emailsViewModel } from './components/Emails'
 import EmailPreview from './components/EmailPreview'
 import Counter from './components/Counter'
 import generatePageLoaders from './pageLoaders'
@@ -29,7 +29,6 @@ class Router extends RealRouter {
 }
 
 window.emailApp = emailApp;
-const store = configureStore();
 
 const pageLoaders = generatePageLoaders(store.dispatch);
 
@@ -58,3 +57,9 @@ render(
   </div>,
   rootElement
 )
+
+const vm = new emailsViewModel();
+
+$(document).ready(function() {
+  ko.applyBindings(vm, $('#ko')[0]);
+});
