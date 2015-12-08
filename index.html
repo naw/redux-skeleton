@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.0/knockout-debug.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <title>Redux Skeleton</title>
     <style>
       div.openEmail {
@@ -31,5 +33,28 @@
     <div class="app" id="root">
     </div>
     <script src="/static/bundle.js"></script>
+
+    <div id="ko">
+      <h1>Emails (fetched at <span data-bind="text: fetchedAt"></span></h1><button data-bind="click: fetchEmails">Fetch</button>
+      <table>
+        <thead>
+          <tr>
+            <th>Subject</th>
+            <th>Sender</th>
+            <th>Folder</th>
+            <th>Delete</th>
+          </tr>
+        </thead>
+        <tbody data-bind="foreach: emails">
+          <tr>
+            <td data-bind="text: subject"></td>
+            <td data-bind="text: sender"></td>
+            <td data-bind="text: $data.folder ? $data.folder.name : 'Missing'"></td>
+            <td><button data-bind="click: function(email) { $parent.removeEmail(email.id) }")>Delete</button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </body>
 </html>

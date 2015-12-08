@@ -4,8 +4,7 @@ import { devTools } from 'redux-devtools';
 import thunk from 'redux-thunk';
 
 export const USE_DEV_TOOLS = false;
-
-export default function configureStore(initialState) {
+let configureStore = function(initialState) {
   let composed = compose(applyMiddleware(thunk));
   if(USE_DEV_TOOLS) {
     composed = compose(composed, devTools());
@@ -21,3 +20,6 @@ export default function configureStore(initialState) {
 
   return store
 }
+
+export default configureStore();
+

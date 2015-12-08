@@ -1,7 +1,8 @@
 import React, { Component, PropTypes } from 'react'
 import superConnect from '../utils/superConnect'
-
 import MoveEmail from './MoveEmail'
+import koConnect from '../utils/koConnect.js'
+import store from '../store/configureStore'
 
 class Emails extends Component {
   render() {
@@ -68,3 +69,11 @@ const runSideEffects = function(state, dispatch) {
 }
 
 export default superConnect(runSideEffects, mapStateToProps, mapDispatchToProps)(Emails);
+
+const emailsViewModel = function() {
+  this.emails = ko.observableArray([]);
+  this.fetchedAt = ko.observable(null);
+  koConnect(this, store, runSideEffects, mapStateToProps, mapDispatchToProps);
+}
+
+export { emailsViewModel }
